@@ -10,8 +10,11 @@
 ...
 ├── data/
 ├── notebooks/
+├── models/
 │
 ├── clean_text.py        # originally Sayar's # modified to remove word tags
+├── eval_kenlm.py        # originally Sayar's
+├── lstm_lm.py           # originally Sayar's
 │
 ├── conda_environment.yaml
 └── requirements.txt
@@ -45,6 +48,32 @@ The training data were imported from various existing sources, with word tags re
 ## References
 
 - https://github.com/ye-kyaw-thu/AIE-F/tree/main/slide-code/class-15/LM-Tutorial
+- ```bibtex
+  @misc{syl_normalizer,
+    author       = {Ye Kyaw Thu},
+    title        = {{Syllable Normalization Tool for Myanmar Language}},
+    version      = {0.6},
+    month        = {May},
+    year         = {2026},
+    publisher    = {GitHub},
+    url          = {https://github.com/ye-kyaw-thu/syl-Normalizer/tree/main/ver_0.6},
+    note         = {Accessed: YYYY-MM-DD},
+    institution  = {Language Understanding Lab (LU Lab), Myanmar}
+  }
+  ```
+- ```bibtex
+  @misc{oppaWord_2025,
+    author       = {Ye Kyaw Thu},
+    title        = {{oppaWord: Hybrid DAG+Bi-MM+LM Myanmar Word Segmenter}},
+    version      = {1.0},
+    month        = {August},
+    year         = {2025},
+    publisher    = {GitHub},
+    url          = {https://github.com/ye-kyaw-thu/oppaWord},
+    note         = {Accessed: YYYY-MM-DD},
+    institution  = {Language Understanding Lab (LU Lab), Myanmar}
+  }
+  ```
 
 ---
 
