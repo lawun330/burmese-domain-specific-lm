@@ -2,6 +2,7 @@
 .ipynb_checkpoints/
 __pycache__/
 logs/
+tmp/
 .DS_Store
 
 # very large corpus (unused)
