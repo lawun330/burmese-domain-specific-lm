@@ -1,7 +1,6 @@
-import kenlm, sys, math
+import sys, math
 
-def evaluate(model_path, test_path, print_stats=False):
-    model = kenlm.LanguageModel(model_path)
+def evaluate(model, test_path, print_stats=False):
 
     sum_log10 = 0.0
     n_words = 0

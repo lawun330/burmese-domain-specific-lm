@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project trains Burmese n-gram language models with KenLM, SRILM, and Neural LM (LSTM) on a shared corpus, then compares toolkit performance and perplexity across news, legal, and religious test domains to study cross-domain generalization.
+This project trains Burmese n-gram language models with KenLM and SRILM on a shared corpus, then compares toolkit performance and perplexity across news, legal, and religious test domains to study cross-domain generalization.
 
 ## File Structure
 ```
@@ -19,8 +19,7 @@ This project trains Burmese n-gram language models with KenLM, SRILM, and Neural
 ├── syl-normalizer/        # originally Sayar's
 │
 ├── clean_text.py          # originally Sayar's # modified to remove word tags
-├── eval_kenlm.py          # originally Sayar's # modified to compute BPC
-├── lstm_lm.py             # originally Sayar's
+├── eval_kenlm_srilm.py    # originally Sayar's eval_kenlm.py # modified to compute BPC and evaluate SRILM
 │
 ├── conda_environment.yaml
 └── requirements.txt
@@ -60,13 +59,24 @@ Test domains were chosen manually, collected by hand, and preprocessed with the 
 
 ## Models
 
-### KenLM
-![KenLM Model Training Diagram](img/kenlm_2g_vs_3g_metrics.png)
+### 1a. General KenLM
+![General KenLM N-gram Results](img/kenlm_2g_vs_3g_metrics.png)
+- **conclusion**: choose 3-gram
 
-### SRILM
+### 2a. General SRILM (Kneser-Ney discounting)
 
+![General SRILM N-gram Results](img/srilm_2g_vs_3g_metrics.png)
+- **conclusion**: choose 3-gram
 
-### Neural LM (LSTM)
+![General SRILM N-gram Interpolation Results](img/srilm_2g_vs_3g_inter_metrics.png)
+- **conclusion**: choose 3-gram
+
+![General SRILM 3-gram Results](img/srilm_3g_plain_vs_inter_metrics.png)
+- **conclusion**: choose interpolation for other domains except `religion`
+
+### 1b. General + Domain-Specific KenLM
+
+### 2b. General + Domain-Specific SRILM (Kneser-Ney discounting)
 
 ---
 
