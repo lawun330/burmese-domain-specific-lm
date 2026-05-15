@@ -2,13 +2,15 @@
 
 ## Overview
 
----
 
 ## File Structure
 ```
 /
 ...
 ├── data/
+│   ├── train/
+│   └── test/
+│
 ├── notebooks/
 ├── models/
 │
@@ -34,9 +36,17 @@
 - Custom data in the legal document domain (from [မြန်မာနိုင်ငံကူးလက်မှတ်ဆိုင်ရာဥပဒေ](https://www.moi.gov.mm/file-download/download/public/103555) published by the Myanmar Ministry of Information)
 - Custom data in the religious text domain (from [ခန္ဓဝိပဿနာဘာဝနာ](https://18milecdn.myanmarseo.com/file/18mile-cdn/books/%E1%80%81%E1%80%94%E1%80%B9%E1%80%93%E1%80%9D%E1%80%AD%E1%80%95%E1%80%BF%E1%80%94%E1%80%AC%20%E1%80%98%E1%80%AC%E1%80%9D%E1%80%94%E1%80%AC.pdf) by 18 Miles Sayardaw)
 
-## Data Collection
+## Data Collection & Preprocessing
 
-The training data were collected from various existing sources, with word tags removed and the datasets combined to create a larger corpus. The test data domains were manually selected, and the data were collected and cleaned using the same preprocessing pipeline.
+### Train Data
+Training data come from existing corpora: word tags are removed, the sources are merged, then passed through syllable normalization (`syl-normalizer`) and OppaWord segmentation to produce the final train corpus.
+
+In `prep_train_data_v1`, the Hugging Face spoken corpus was included; the merged file exceeded 3 GB and could not be loaded on a machine with limited RAM. `prep_train_data_v2` drops that corpus and uses only the ALT and myPOS datasets.
+
+### Test Data
+Test domains were chosen manually, collected by hand, and preprocessed with the same pipeline (punctuation/tag cleaning, syllable normalization, OppaWord). Sentences are split on Burmese full stops (`။`); very short lines (e.g. legal section numbers) are dropped. Remaining syllables are realigned into a fixed grid of 20 syllables per line and 15 lines per document (300 syllables per document), with the same document count across all three domains. The balanced outputs are saved as `*.cleaned.state4`.
+
+---
 
 ## Environment Setup
 
@@ -75,8 +85,6 @@ The training data were collected from various existing sources, with word tags r
     institution  = {Language Understanding Lab (LU Lab), Myanmar}
   }
   ```
-
----
 
 ## Note
 
