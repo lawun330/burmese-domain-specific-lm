@@ -53,6 +53,27 @@ Test domains were chosen manually, collected by hand, and preprocessed with the 
 - **conclusion**: choose mixed model
 
 ### 2b. General + Domain-Specific SRILM (Kneser-Ney discounting)
+![Combined KenLM Results](img/srilm_general_domain_mix_metrics.png)
+- **conclusion**: choose mixed model for other domains except `religion`
+
+### 3. KenLM vs. SRILM on Different Domains		
+
+|  Domain  | Metric        | KenLM 3-gram Mixed | SRILM 3-gram Mixed |
+|----------|---------------|--------------------|--------------------|
+|          | **PPL**       |      _106.19_      |       115.90       |
+|   News   | **Entropy**   |      _4.67_        |       4.75         |
+|          | **BPC**       |      _1.74_        |       1.77         |
+|----------|---------------|--------------------|--------------------|
+|          | **PPL**       |      _117.826_     |       117.922      |
+|   Legal  | **Entropy**   |      _4.769_       |       4.770        |
+|          | **BPC**       |      _1.782_       |       1.783        |
+|----------|---------------|--------------------|--------------------|
+|          | **PPL**       |      _52.92_       |       54.85        |
+| Religion | **Entropy**   |      _3.97_        |       4.00         |
+|          | **BPC**       |      _1.49_        |       1.50         |
+|----------|---------------|--------------------|--------------------|
+
+- **conclusion**: KenLM 3-gram mixed model > SRILM 3-gram mixed model
 
 ---
 
@@ -68,6 +89,11 @@ Test domains were chosen manually, collected by hand, and preprocessed with the 
 ├── img/
 ├── notebooks/
 ├── models/
+│   ├── kenlm/
+│   │   └── ppl/
+│   └── srilm/
+│       └── ppl/
+│
 ├── oppaword/              # originally Sayar's
 ├── syl-normalizer/        # originally Sayar's
 │
