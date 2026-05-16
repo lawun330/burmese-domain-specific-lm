@@ -10,6 +10,7 @@ This project trains Burmese n-gram language models with KenLM and SRILM on a sha
 ...
 ├── data/
 │   ├── train/
+│   │   └── domain-specific/
 │   └── test/
 │
 ├── img/
@@ -34,12 +35,13 @@ This project trains Burmese n-gram language models with KenLM and SRILM on a sha
 ---
 
 ## Dataset
-### Train Data
+
+### Train Data (General LM)
 - [Myanmar ALT](https://www2.nict.go.jp/astrec-att/member/mutiyama/ALT/my-alt-190530.zip) from [ALT Treebank Corpus](https://www2.nict.go.jp/astrec-att/member/mutiyama/ALT/)
 - [Sayar's myPos version 3.0](https://github.com/ye-kyaw-thu/myPOS/blob/master/corpus-ver-3.0/corpus/mypos-ver.3.0.txt)
 - https://huggingface.co/datasets/URajinda/myanmar_spoken_corpus_v4_cleaned (Discarded later due to RAM issue)
 
-### Test Data
+### Train Data (Domain-Specific LM) && Test Data
 
 - Custom data in the news article domain (from [BBC Burmese International News](https://www.bbc.com/burmese/topics/cnlv9j1z93wt))
 - Custom data in the legal document domain (from [မြန်မာနိုင်ငံကူးလက်မှတ်ဆိုင်ရာဥပဒေ](https://www.moi.gov.mm/file-download/download/public/103555) published by the Myanmar Ministry of Information)
