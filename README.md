@@ -4,34 +4,6 @@
 
 This project trains Burmese n-gram language models with KenLM and SRILM on a shared corpus, then compares toolkit performance and perplexity across news, legal, and religious test domains to study cross-domain generalization.
 
-## File Structure
-```
-/
-...
-├── data/
-│   ├── train/
-│   │   └── domain-specific/
-│   └── test/
-│
-├── img/
-├── notebooks/
-├── models/
-├── oppaword/              # originally Sayar's
-├── syl-normalizer/        # originally Sayar's
-│
-├── clean_text.py          # originally Sayar's # modified to remove word tags
-├── eval_kenlm_srilm.py    # originally Sayar's eval_kenlm.py # modified to compute BPC and evaluate SRILM
-│
-├── conda_environment.yaml
-└── requirements.txt
-```
-
-## Environment Setup
-
-- Install KenLM from https://github.com/kpu/kenlm
-- Install SRILM from https://github.com/BitSpeech/SRILM
-- Install dependencies from requirements.txt or conda_environment.yaml
-
 ---
 
 ## Dataset
@@ -77,10 +49,66 @@ Test domains were chosen manually, collected by hand, and preprocessed with the 
 - **conclusion**: choose interpolation for other domains except `religion`
 
 ### 1b. General + Domain-Specific KenLM
+![Combined KenLM Results](img/kenlm_general_domain_mix_metrics.png)
+- **conclusion**: choose mixed model
 
 ### 2b. General + Domain-Specific SRILM (Kneser-Ney discounting)
 
 ---
+
+## File Structure
+```
+/
+...
+├── data/
+│   ├── train/
+│   │   └── domain-specific/
+│   └── test/
+│
+├── img/
+├── notebooks/
+├── models/
+├── oppaword/              # originally Sayar's
+├── syl-normalizer/        # originally Sayar's
+│
+├── clean_text.py          # originally Sayar's # modified to remove word tags
+├── eval_kenlm_srilm.py    # originally Sayar's eval_kenlm.py # modified to compute BPC and evaluate SRILM
+│
+├── conda_environment.yaml
+└── requirements.txt
+```
+
+## File formats
+
+### Language models
+
+- **`.arpa`**: ARPA-format n-gram language model.
+- **`.arpa.binary`**, **`.arpa.ken.binary`**: KenLM binary model (from KenLM `build_binary`).
+- **`.arpa.bin`**: SRILM binary model (from SRILM `ngram -write-bin-lm`).
+- **`.arpa.error`**: stderr when building an ARPA model.
+
+### Evaluation/tuning artifacts
+
+- **`.ppl`**: Perplexity / debugging output for `compute-best-mix` (from SRILM `ngram -ppl`).
+
+### Text corpora
+
+- **`.raw`**: Unprocessed text.
+- **`.cleaned.state1`**: After punctuation and word/POS tags removal (`clean_text.py`).
+- **`.cleaned.state2`**: After syllable normalization (`syl-normalizer/`).
+- **`.cleaned.state3`**: After word segmentation (`oppaword/`); typical line input for training general LMs.
+- **`.cleaned.state4`**: Further standardized token layout used for test sets only.
+
+### Train/dev splits
+
+- **`.train`**: In-domain training split for domain-specific LMs.
+- **`.dev`**: In-domain development split for tuning interpolation weights.
+
+## Environment Setup
+
+- Install KenLM from https://github.com/kpu/kenlm
+- Install SRILM from https://github.com/BitSpeech/SRILM
+- Install dependencies from `requirements.txt` or `conda_environment.yaml`
 
 ## References
 
